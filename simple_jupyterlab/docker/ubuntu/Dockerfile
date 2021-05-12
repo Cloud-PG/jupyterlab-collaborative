@@ -16,7 +16,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y build-essential python3-dev py
     libczmq-dev
 
 RUN python3 -m pip install -U pip setuptools
-RUN snap install node --classic --channel=14
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 
 WORKDIR /usr/share/jupyterlab/jupyterlab
 
