@@ -1,0 +1,65 @@
+---
+- name: Installing Jupyterlab collaborative
+  hosts: 127.0.0.1
+  connection: local
+  become: true
+
+  # Install jupyterlab with collaborative mode
+  #
+  # After installation, launch with:
+  #   jupyter lab --collaborative --LabApp.app_dir=/usr/share/jupyterlab --ip=0.0.0.0 --allow-root --dev-mode
+  #
+  # Notes:
+  #   - '--dev-mode' is required to use the modified `dev_mode` folder in `/usr/share/jupyterlab`
+  #   - '--LabApp.app_dir' is required to indicate the correct jupyterlab app builded
+  tasks:
+    - name: clone jupyter-rtc repo
+      git:
+        repo: https://github.com/jupyter-rtc/jupyterlab.git
+        dest: /usr/share/jupyterlab
+
+    - name: install dependencies
+      apt:
+        pkg:
+          - build-essential
+          - libffi-dev
+          - libargon2-0-dev
+          - libpixman-1-dev
+          - libcairo2-dev
+          - libpangox-1.0-dev
+          - libjpeg-dev
+          - libczmq-dev
+          - python3-dev
+
+    - name: install nodejs
+      shell: snap install node --classic --channel=14
+
+    - name: Install jupyterlab-rtc
+      shell:
+        cmd: pip3 install -e .
+        chdir: /usr/share/jupyterlab
+
+    - name: Init jlpm
+      shell:
+        cmd: jlpm
+        chdir: /usr/share/jupyterlab
+
+    - name: Build jupyterlab-rtc with jlpm
+      shell:
+        cmd: jlpm build
+        chdir: /usr/share/jupyterlab
+
+    - name: Build jupyterlab app
+      shell:
+        cmd: jupyter lab build --app-dir /usr/share/jupyterlab
+        chdir: /usr/share/jupyterlab
+
+    - name: Install jupyterlab-link-share
+      pip:
+        name: jupyterlab-link-share
+        executable: pip3
+
+    - name: Build jupyterlab app update
+      shell:
+        cmd: jupyter lab build --app-dir /usr/share/jupyterlab
+        chdir: /usr/share/jupyterlab
