@@ -30,6 +30,6 @@ RUN jupyter lab build --app-dir /usr/share/jupyterlab/jupyterlab
 RUN pip3 install jupyterlab-link-share
 RUN jupyter lab build --app-dir /usr/share/jupyterlab/jupyterlab
 
-WORKDIR /usr/workspace
+WORKDIR /usr/share/workspace
 
-CMD ["jupyter", "lab", "--LabApp.app_dir", "/usr/share/jupyterlab/jupyterlab", "--ip", "0.0.0.0", "--allow-root", "--dev-mode", "--collaborative", "true"]
+CMD ["jupyter", "lab", "--collaborative", "--LabApp.app_dir=/usr/share/jupyterlab/jupyterlab", "--ip=0.0.0.0", "--allow-root", "--dev-mode"]
