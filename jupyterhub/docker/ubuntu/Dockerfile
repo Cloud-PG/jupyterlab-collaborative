@@ -38,7 +38,7 @@ RUN /bin/bash -c "cp -r /usr/share/jupyterlab/dev_mode/{static,schemas,themes} /
 
 WORKDIR /usr/share/workspace
 
-RUN apt install -y libcurl4-openssl-dev libssl-dev
+RUN DEBIAN_FRONTEND=noninteractive apt install -y libcurl4-openssl-dev libssl-dev
 RUN pip3 install jupyterhub pycurl
 RUN npm install -g configurable-http-proxy
 COPY jupyterhub_config.py /etc/jupyterhub/
