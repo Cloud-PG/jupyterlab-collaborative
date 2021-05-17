@@ -2,7 +2,6 @@ FROM ubuntu:20.04
 
 EXPOSE 8000
 EXPOSE 8888
-EXPOSE 8889
 
 RUN DEBIAN_FRONTEND=noninteractive apt update && apt upgrade -y && apt install -y git
 
@@ -45,4 +44,6 @@ COPY jupyterhub_config.py /etc/jupyterhub/
 
 WORKDIR /usr/share/workspace
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.allow_password_change=False", \
+     "--ServerApp.keyfile=/tmp/certs/jupyter/hostcert.key", \
+     "--ServerApp.certfile=/tmp/certs/jupyter/hostcert.pem"]
