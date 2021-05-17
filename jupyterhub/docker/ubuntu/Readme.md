@@ -1,4 +1,4 @@
-## Hot to test
+## How to test
 
 Use docker compose to launch the services:
 
