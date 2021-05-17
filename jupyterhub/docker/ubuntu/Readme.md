@@ -8,6 +8,6 @@ docker compose up --build
 
 Go to [http://localhost:8000/hub/home](http://localhost:8000/hub/home) and login
 using the testing user `user1:user1`. You will find the collaboration jupyterlab
-as a service in jupyterhub.
+as a service in jupyterhub panel as follow:
 
 ![jupyterhub_services](jupyterhub_services.png)
