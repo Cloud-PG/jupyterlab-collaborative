@@ -41,6 +41,8 @@ RUN pip3 install jupyterhub pycurl
 RUN npm install -g configurable-http-proxy
 RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 
+COPY jupyterhub_config.py /etc/jupyterhub/
+
 WORKDIR /usr/share/workspace
 
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root"]
