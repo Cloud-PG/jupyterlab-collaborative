@@ -605,7 +605,15 @@ c.JupyterHub.authenticator_class = "jupyterhub.auth.DummyAuthenticator"
 #          }
 #      ]
 #  Default: []
-# c.JupyterHub.services = []
+# Possible solution for collaborative service
+c.JupyterHub.services = [
+    {
+        'url': "http://collab_proxy:8099",
+        'name': 'collab',
+        # You can create a token with `openssl rand -hex 32`
+        'api_token': 'API_TOKEN_EXAMPLE',
+    },
+]
 
 ## Instead of starting the Application, dump configuration to stdout
 #  See also: Application.show_config

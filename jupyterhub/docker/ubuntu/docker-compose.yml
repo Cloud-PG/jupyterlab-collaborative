@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  jupyterhub:
+    depends_on:
+      - collab_proxy
+      - jupyterlab_collab
+    build: .
+    ports:
+    - 8000:8000
+  
+  collab_proxy:
+    build: collab_proxy
+    environment:
+      - JUPYTERHUB_BASE_URL=http://jupyterhub:8000
+      - JUPYTERHUB_API_URL=http://jupyterhub:8000/hub/api
+      - JUPYTERHUB_SERVICE_PREFIX=/services/collab/
+      - JUPYTERHUB_API_TOKEN=API_TOKEN_EXAMPLE
+      # You can create a token with `openssl rand -hex 32`
+      - JUPYTER_TOKEN=JUPYTER_TOKEN_EXAMPLE
+    ports:
+      - 8099:8099
+  
+  jupyterlab_collab:
+    build: ../../../simple_jupyterlab/docker/ubuntu/no_certs
+    environment:
+        # You can create a token with `openssl rand -hex 32`
+        - JUPYTER_TOKEN=JUPYTER_TOKEN_EXAMPLE
+    ports:
+      - 8889:8888

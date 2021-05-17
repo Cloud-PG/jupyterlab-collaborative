@@ -2,7 +2,6 @@ FROM ubuntu:20.04
 
 EXPOSE 8000
 EXPOSE 8888
-EXPOSE 8889
 
 RUN DEBIAN_FRONTEND=noninteractive apt update && apt upgrade -y && apt install -y git
 
