@@ -771,8 +771,8 @@ c.NotebookApp.ip = '0.0.0.0'
 # c.Session.unpacker = 'json'
 
 ## Username for the Session. Default is your system username.
-#  Default: 'mircotracolli'
-# c.Session.username = 'mircotracolli'
+#  Default: ''
+# c.Session.username = ''
 
 #------------------------------------------------------------------------------
 # MultiKernelManager(LoggingConfigurable) configuration
