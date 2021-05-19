@@ -49,6 +49,7 @@ COPY requirements.txt /usr/share/workspace
 RUN DEBIAN_FRONTEND=noninteractive apt install -y wget graphviz
 RUN python3 -m pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.allow_password_change=False", \
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--debug", \
+     "--ServerApp.allow_password_change=False", \
      "--ServerApp.keyfile=/tmp/certs/jupyter/hostcert.key", \
      "--ServerApp.certfile=/tmp/certs/jupyter/hostcert.pem"]
