@@ -48,8 +48,11 @@ WORKDIR /usr/share/workspace
 COPY requirements.txt /usr/share/workspace
 RUN DEBIAN_FRONTEND=noninteractive apt install -y wget graphviz
 RUN python3 -m pip install --no-cache-dir -r requirements.txt && rm requirements.txt
+RUN python3 -m pip install scikit-image
 
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--debug", \
-     "--ServerApp.allow_password_change=False", \
-     "--ServerApp.keyfile=/tmp/certs/jupyter/hostcert.key", \
-     "--ServerApp.certfile=/tmp/certs/jupyter/hostcert.pem"]
+    "--ServerApp.allow_password_change=False", \
+    "--ServerApp.keyfile=/usr/local/share/jupyter/hostcert.key", \
+    "--ServerApp.certfile=/usr/local/share/jupyter/hostcert.pem", \
+    "--MappingKernelManager.cull_idle_timeout=10800", \
+    "--MappingKernelManager.cull_connected=True"]
